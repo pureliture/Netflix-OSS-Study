@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: product-service
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        service-name: ${spring.application.name}
+  data:
+    mongodb:
+      host: localhost  # 기본값
+      port: 27017       # 기본 MongoDB 포트
+
+server:
+  port: 8092
