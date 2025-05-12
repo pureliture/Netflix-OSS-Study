@@ -1,3 +1,6 @@
+server:
+  port: 8092
+
 spring:
   application:
     name: product-service
@@ -11,6 +14,3 @@ spring:
     mongodb:
       host: localhost  # 기본값
       port: 27017       # 기본 MongoDB 포트
-
-server:
-  port: 8092
