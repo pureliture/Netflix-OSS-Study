@@ -8,11 +8,11 @@ spring:
     gateway:
       routes:
         - id: order-service
-          uri: http://localhost:8081
+          uri: http://localhost:8091
           predicates:
             - Path=/order/**
         - id: product-service
-          uri: http://localhost:8082
+          uri: http://localhost:8092
           predicates:
             - Path=/product/**
     consul:
@@ -20,3 +20,9 @@ spring:
       port: 8500
       discovery:
         service-name: ${spring.application.name}
+
+  security:
+    oauth2:
+      resource-server:
+        jwt:
+          public-key-location: classpath:/keys/public.pem

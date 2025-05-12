@@ -1,4 +1,4 @@
-package com.lguplus.nucube.gateway;
+package com.lguplus.nucube.gateway.config;
 
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
@@ -21,6 +21,11 @@ public class GatewayConfig {
                         .path("/product/**")
                         .filters(f -> f.rewritePath("/product/(?<segment>.*)", "/${segment}"))
                         .uri("lb://product-service")) // ✅ 로드밸런서 사용
+
+                .route("auth-service", r -> r
+                        .path("/auth/**")
+                        .filters(f -> f.rewritePath("/auth/(?<segment>.*)", "/${segment}"))
+                        .uri("http://localhost:8093")) // Direct URL to auth-service
 
                 .build();
     }

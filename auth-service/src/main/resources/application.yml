@@ -1,0 +1,40 @@
+server:
+  port: 8093
+
+spring:
+  application:
+    name: auth-service
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        service-name: { spring.application.name }
+  datasource:
+    url: jdbc:h2:mem:authdb;DB_CLOSE_DELAY=-1
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    defer-datasource-initialization: true  # SQL 초기화
+  sql:
+    init:
+      mode: always  # 항상 SQL 초기화 스크립트 실행
+      schema-locations: classpath:schema.sql
+      data-locations: classpath:init-data.sql
+
+jwt:
+  key:
+    private: classpath:private.pem
+    public: classpath:public.pem
+  expiration: 3600
+  issuer: auth-service
+
